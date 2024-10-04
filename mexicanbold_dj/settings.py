@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
 from oscar.defaults import *
+import helpers.cloudflare.settings
 import environ
 import os
 from decouple import config as env_config
@@ -235,23 +236,23 @@ CLOUDFLARE_R2_BUCKET=config("CLOUDFLARE_R2_BUCKET")
 CLOUDFLARE_R2_ACCESS_KEY=config("CLOUDFLARE_R2_ACCESS_KEY")
 CLOUDFLARE_R2_SECRET_KEY=config("CLOUDFLARE_R2_SECRET_KEY")
 CLOUDFLARE_R2_BUCKET_ENDPOINT=config("CLOUDFLARE_R2_BUCKET_ENDPOINT")
-
-CLOUDFLARE_R2_CONFIG_OPTIONS = {}
-
-bucket_name = config("CLOUDFLARE_R2_BUCKET")
-endpoint_url = config("CLOUDFLARE_R2_BUCKET_ENDPOINT")
-access_key = config("CLOUDFLARE_R2_ACCESS_KEY")
-secret_key = config("CLOUDFLARE_R2_SECRET_KEY")
-
-if all([bucket_name, endpoint_url, access_key, secret_key]):
-    CLOUDFLARE_R2_CONFIG_OPTIONS = {
-        "bucket_name": config("CLOUDFLARE_R2_BUCKET"),
-        "default_acl": "public-read",  # "private"
-        "signature_version": "s3v4",
-        "endpoint_url": config("CLOUDFLARE_R2_BUCKET_ENDPOINT"),
-        "access_key": config("CLOUDFLARE_R2_ACCESS_KEY"),
-        "secret_key": config("CLOUDFLARE_R2_SECRET_KEY"),
-    }
+#The settings below for Cloudflare, commented out, are also in helpers/cloudflare/settings.py and imported into the main settings.py
+#CLOUDFLARE_R2_CONFIG_OPTIONS = {}
+#
+#bucket_name = config("CLOUDFLARE_R2_BUCKET")
+#endpoint_url = config("CLOUDFLARE_R2_BUCKET_ENDPOINT")
+#access_key = config("CLOUDFLARE_R2_ACCESS_KEY")
+#secret_key = config("CLOUDFLARE_R2_SECRET_KEY")
+#
+#if all([bucket_name, endpoint_url, access_key, secret_key]):
+#    CLOUDFLARE_R2_CONFIG_OPTIONS = {
+#        "bucket_name": config("CLOUDFLARE_R2_BUCKET"),
+#        "default_acl": "public-read",  # "private"
+#        "signature_version": "s3v4",
+#        "endpoint_url": config("CLOUDFLARE_R2_BUCKET_ENDPOINT"),
+#        "access_key": config("CLOUDFLARE_R2_ACCESS_KEY"),
+#        "secret_key": config("CLOUDFLARE_R2_SECRET_KEY"),
+#    }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
