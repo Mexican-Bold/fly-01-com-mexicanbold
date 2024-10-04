@@ -231,6 +231,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+CLOUDFLARE_R2_BUCKET=config("CLOUDFLARE_R2_BUCKET")
+CLOUDFLARE_R2_ACCESS_KEY=config("CLOUDFLARE_R2_ACCESS_KEY")
+CLOUDFLARE_R2_SECRET_KEY=config("CLOUDFLARE_R2_SECRET_KEY")
+CLOUDFLARE_R2_BUCKET_ENDPOINT=config("CLOUDFLARE_R2_BUCKET_ENDPOINT")
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
