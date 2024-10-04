@@ -236,20 +236,35 @@ CLOUDFLARE_R2_ACCESS_KEY=config("CLOUDFLARE_R2_ACCESS_KEY")
 CLOUDFLARE_R2_SECRET_KEY=config("CLOUDFLARE_R2_SECRET_KEY")
 CLOUDFLARE_R2_BUCKET_ENDPOINT=config("CLOUDFLARE_R2_BUCKET_ENDPOINT")
 
+CLOUDFLARE_R2_CONFIG_OPTIONS = {}
 
+bucket_name = config("CLOUDFLARE_R2_BUCKET")
+endpoint_url = config("CLOUDFLARE_R2_BUCKET_ENDPOINT")
+access_key = config("CLOUDFLARE_R2_ACCESS_KEY")
+secret_key = config("CLOUDFLARE_R2_SECRET_KEY")
+
+if all([bucket_name, endpoint_url, access_key, secret_key]):
+    CLOUDFLARE_R2_CONFIG_OPTIONS = {
+        "bucket_name": config("CLOUDFLARE_R2_BUCKET"),
+        "default_acl": "public-read",  # "private"
+        "signature_version": "s3v4",
+        "endpoint_url": config("CLOUDFLARE_R2_BUCKET_ENDPOINT"),
+        "access_key": config("CLOUDFLARE_R2_ACCESS_KEY"),
+        "secret_key": config("CLOUDFLARE_R2_SECRET_KEY"),
+    }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#STORAGES = {
-#    "default": {
-#        "BACKEND": "helpers.cloudflare.storages.MediaFileStorage",
-#        "OPTIONS": helpers.cloudflare.settings.CLOUDFLARE_R2_CONFIG_OPTIONS,
-#    },
-#    "staticfiles": {
-#        "BACKEND": "helpers.cloudflare.storages.StaticFileStorage",
-#        "OPTIONS": helpers.cloudflare.settings.CLOUDFLARE_R2_CONFIG_OPTIONS,
-#    },
-#}
+STORAGES = {
+    "default": {
+        "BACKEND": "helpers.cloudflare.storages.MediaFileStorage",
+        "OPTIONS": helpers.cloudflare.settings.CLOUDFLARE_R2_CONFIG_OPTIONS,
+    },
+    "staticfiles": {
+        "BACKEND": "helpers.cloudflare.storages.StaticFileStorage",
+        "OPTIONS": helpers.cloudflare.settings.CLOUDFLARE_R2_CONFIG_OPTIONS,
+    },
+}
