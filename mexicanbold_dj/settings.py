@@ -13,6 +13,13 @@ from pathlib import Path
 from oscar.defaults import *
 import environ
 import os
+from decouple import config as env_config
+
+try:
+    from decouple import config
+except:
+    import os
+    config = os.environ.get
 
 env = environ.Env(
     # set casting, default value
@@ -29,7 +36,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # False if not in os.environ because of casting above
-DEBUG = env('DEBUG')
+DEBUG = config('DJANGO_DEBUG', cast=bool, default=False)
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
@@ -56,25 +63,25 @@ SECRET_KEY = env('SECRET_KEY')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.env('DB_NAME'),
-        'USER': os.env('DB_USER'),
-        'PASSWORD': os.env('DB_PASS'),
-        'HOST': os.env('DB_HOST'),
-        'PORT': os.env('DB_PORT'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASS'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
         'ATOMIC_REQUESTS': True,
         
     }
 }
-CACHES = {
+#CACHES = {
     # Read os.environ['CACHE_URL'] and raises
     # ImproperlyConfigured exception if not found.
     #
     # The cache() method is an alias for cache_url().
-    'default': env.cache(),
+#    'default': env.cache(),
 
     # read os.environ['REDIS_URL']
-    'redis': env.cache_url('REDIS_URL')
-}
+    #'redis': env.cache_url('REDIS_URL')
+#}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -137,7 +144,6 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -230,13 +236,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STORAGES = {
-    "default": {
-        "BACKEND": "helpers.cloudflare.storages.MediaFileStorage",
-        "OPTIONS": helpers.cloudflare.settings.CLOUDFLARE_R2_CONFIG_OPTIONS,
-    },
-    "staticfiles": {
-        "BACKEND": "helpers.cloudflare.storages.StaticFileStorage",
-        "OPTIONS": helpers.cloudflare.settings.CLOUDFLARE_R2_CONFIG_OPTIONS,
-    },
-}
+#STORAGES = {
+#    "default": {
+#        "BACKEND": "helpers.cloudflare.storages.MediaFileStorage",
+#        "OPTIONS": helpers.cloudflare.settings.CLOUDFLARE_R2_CONFIG_OPTIONS,
+#    },
+#    "staticfiles": {
+#        "BACKEND": "helpers.cloudflare.storages.StaticFileStorage",
+#        "OPTIONS": helpers.cloudflare.settings.CLOUDFLARE_R2_CONFIG_OPTIONS,
+#    },
+#}
