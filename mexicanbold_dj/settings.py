@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
+import dj_database_url
 from oscar.defaults import *
 import helpers.cloudflare.settings
 import environ
@@ -60,6 +61,13 @@ SECRET_KEY = env('SECRET_KEY')
 #}
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+#DATABASES = {
+#    'default': dj_database_url.parse(
+#        'postgres://...',
+#        conn_max_age=600,
+#        conn_health_checks=True,
+#    )
+#}
 
 DATABASES = {
     'default': {
@@ -92,6 +100,9 @@ DATABASES = {
 DEBUG = True
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+
+CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']  # <-- Updated!
+
 
 # Application definition
 
