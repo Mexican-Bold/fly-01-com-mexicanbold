@@ -103,6 +103,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'blog',
+
 	'django.contrib.sites',
 	'django.contrib.flatpages',
     'oscar.config.Shop',
@@ -232,6 +234,10 @@ OSCAR_ORDER_STATUS_PIPELINE = {
     'Pending': ('Being processed', 'Cancelled',),
     'Being processed': ('Processed', 'Cancelled',),
     'Cancelled': (),
+}
+
+OSCAR_ORDER_STATUS_CASCADE = {
+    'Being processed': 'In progress'
 }
 
 
