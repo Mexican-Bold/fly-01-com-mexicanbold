@@ -14,7 +14,7 @@ click==8.1.7
 click-didyoumean==0.3.1
 click-plugins==1.1.1
 click-repl==0.3.0
-Cython==0.29.33
+Cython==0.29.30
 diskcache==5.6.3
 dj-database-url==2.2.0
 dj-email-url==1.0.6
