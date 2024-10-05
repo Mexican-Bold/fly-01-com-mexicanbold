@@ -14,7 +14,7 @@ click==8.1.7
 click-didyoumean==0.3.1
 click-plugins==1.1.1
 click-repl==0.3.0
-Cython==0.29.37
+Cython==0.29.33
 diskcache==5.6.3
 dj-database-url==2.2.0
 dj-email-url==1.0.6
@@ -45,6 +45,7 @@ inertia-django==0.6.0
 jaeger-client==4.8.0
 jmespath==1.0.1
 kombu==5.4.2
+numpy==2.1.1
 opentracing==2.4.0
 packaging==24.1
 phonenumbers==8.13.46
@@ -53,6 +54,7 @@ pillow-avif-plugin==1.4.6
 pip-tools==7.4.1
 promise==2.3
 prompt_toolkit==3.0.48
+psycopg2==2.9.9
 psycopg2-binary==2.9.9
 purl==1.6
 pycountry==24.6.1

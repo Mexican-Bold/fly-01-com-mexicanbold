@@ -16,6 +16,8 @@ import environ
 import helpers.cloudflare
 import os
 from decouple import config as env_config
+from django.core.management.utils import get_random_secret_key
+
 
 try:
     from decouple import config
@@ -42,7 +44,9 @@ DEBUG = config('DJANGO_DEBUG', cast=bool, default=False)
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
-SECRET_KEY = env('SECRET_KEY')
+#SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env.str('SECRET_KEY', default=get_random_secret_key())  # <-- Updated!
+
 
 # Parse database connection url strings
 # like psql://user:pass@127.0.0.1:8458/db
@@ -101,7 +105,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
-CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']  # <-- Updated!
+CSRF_TRUSTED_ORIGINS = ['https://mexicanbold-dj.fly.dev']  # <-- Updated!
+
+
 
 
 # Application definition
